@@ -1,8 +1,8 @@
 use structopt::StructOpt;
 mod cli;
-mod task;
+mod tasks;
 
-use clie::{Action::*, CommandLineArgs};
+use cli::{Action::*, CommandLineArgs};
 use tasks::Task;
 
 fn main() {
@@ -14,7 +14,7 @@ fn main() {
     let journal_file = journal_file.expect("Failed to find journal file");
 
     match action {
-        Add { text } => tasks::add_task(journal_file, Task::new(text)).
+        Add { task } => tasks::add_task(journal_file, Task::new(task)),
         List => tasks::list_tasks(journal_file),
         Done { position } => tasks::complete_task(journal_file, position),
     }
